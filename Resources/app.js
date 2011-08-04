@@ -219,7 +219,7 @@ function CategorySelectionWin(demos){
 		data = [];
 	for(var cat in demos){
 		var row = Ti.UI.createTableViewRow({category:cat,title:demos[cat].title+" ("+demos[cat].demos.length+")"});
-		row.addEventListener("click",function(e){ maintabgroup.activeTab.open(CategoryWin(demos[cat])); });
+		row.addEventListener("click",function(e){ maintabgroup.activeTab.open(CategoryWin(demos[e.row.category])); });
 		data.push(row);
 	}
 	win.add(Ti.UI.createTableView({data:data}));
