@@ -187,9 +187,6 @@ function Child(def){
 };
 
 function DemoView(o){
-	var label = Ti.UI.createLabel({
-		bottom: 0, left:5, right: 5, height: 80, text: o.description, font: {fontSize:12}
-	});
 	var view = Ti.UI.createView(),
 		gp = GrandParent(),
 		parent = o.parent;
@@ -198,7 +195,7 @@ function DemoView(o){
 	});
 	gp.add(parent);
 	view.add(gp);
-	view.add(label);
+	view.add(Ti.UI.createLabel({ bottom: 0, left:5, right: 5, height: 80, text: o.description, font: {fontSize:12} }));
 	return view;
 }
 
@@ -212,9 +209,8 @@ function CategoryWin(cat){
 		});
 		views.push(d);
 	});
-	var scroll = Ti.UI.createScrollableView({views:views,showPagingControl:true,pagingControlHeight:30}),
-		win = Ti.UI.createWindow({backgroundColor:"#FFF",title:cat.title});
-	win.add(scroll);
+	var win = Ti.UI.createWindow({backgroundColor:"#FFF",title:cat.title});
+	win.add(Ti.UI.createScrollableView({views:views,showPagingControl:true,pagingControlHeight:30}));
 	return win;
 }
 
@@ -231,13 +227,12 @@ function CategorySelectionWin(demos){
 }
 
 function AboutWin(){
-	var win = Ti.UI.createWindow({title:"About",backgroundColor:"#FFF"}),
-		label = Ti.UI.createLabel({
-			top:20,textAlign:"top",left:5,right:5,
-			text:
+	var win = Ti.UI.createWindow({title:"About",backgroundColor:"#FFF"});
+	win.add(Ti.UI.createLabel({
+		top:20,textAlign:"top",left:5,right:5,
+		text:
 "This app contains a number of demonstrations aimed to further the understanding of how views are positioned in a titanium app.\nThe code is available at http://github.com/krawaller/tiview \nFor further explanation, please see the corresponding blog post on http://blog.krawaller.se"
-		});
-	win.add(label);
+	}));
 	return win;
 }
 
