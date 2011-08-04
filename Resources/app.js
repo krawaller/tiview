@@ -16,7 +16,7 @@ var demos = {
 		title: "Absolute positioning",
 		description: "how to position a view (absolutely) within a parent",
 		demos: [{
-			description: "A default view will fill out its parent view (the child is yellow, completely hiding the red parent)",
+			description: "Absolute positioning is the default layout mechanism used. A child view without any related properties set will fill out its parent view (the child is yellow, completely hiding the red parent).",
 			definition: {}
 		},{
 			description: "Use height and width to define the size of the child. Default values are 'auto', which will fill out the parent, as we saw before.",
@@ -66,7 +66,7 @@ var demos = {
 			return Ti.UI.createView({backgroundColor:"red",layout:"vertical"});
 		},
 		demos: [{
-			description: "In a vertical layout, a child is placed in relation to the bottom of the previous child!",
+			description: "A parent with the layout property set to 'vertical' uses a vertical layout mechanism instead. Here, a child is placed in relation to the bottom of the previous child.",
 			definition: [{height:80,width:100,left:30},{top:5,left:20,height:80,width:60}]
 		},{
 			description: "Everything works as normal, even negative offsets and zIndexes. Except...",
@@ -119,6 +119,9 @@ var demos = {
 		},{
 			description: "...except that it might make the view end up on its own row!",
 			definition: [{top:10,height:80,width:70,left:5,right:5},{height:80,width:70},{left:5,height:120,width:60,right:2000}]
+		},{
+			description: "Must as a child in a vertical layout must have a height, all children in a horizontal layout must have a set width. This parent contains a child with height 200 but no width, which therefore is invisible.",
+			definition: {height:200}
 		}]
 	},
 	scrollview: {
@@ -133,7 +136,7 @@ var demos = {
 			return scroll;
 		},
 		demos: [{
-			description: "Here the red parents are ScrollViews. Contrary to normal views, they will crop overflowing content. Many times this is why you will want to use them, so they might as well have been called CropViews!",
+			description: "Here the red parents are ScrollViews. Contrary to normal views, they will crop overflowing content, as seen here. Many times this is why you will want to use them, so they might as well have been called CropViews!",
 			definition: {top:-10,left:20,height:90,width:90}
 		},{
 			description: "Scrolling is only available if explicitly enabled. If contentHeight is set to auto, the user can scroll the view vertically to reveal the outofbounds content.",
