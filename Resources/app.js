@@ -14,7 +14,6 @@ function mixin(prio,def){
 var demos = {
 	basicposition: {
 		title: "Absolute positioning",
-		description: "how to position a view (absolutely) within a parent",
 		demos: [{
 			description: "Absolute positioning is the default layout mechanism used. A child view without any related properties set will fill out its parent view (the child is yellow, completely hiding the red parent).",
 			definition: {}
@@ -28,19 +27,19 @@ var demos = {
 			description: "Setting top and a height gets the same result as...",
 			definition: {top: 30, height: 80}
 		},{
-			description: "...setting top and bottom (if you know the parent's height and do the math right)",
+			description: "...setting top and bottom (if you know the parent's height and do the math right).",
 			definition: {top: 30, bottom: 125}
 		},{
 			description: "If you set top, bottom AND height (don't!), then weird things happen. The height is honored, but the offset gets screwed up.",
 			definition: {top: 5, height: 80, bottom: 60}
 		},{
-			description: "The same of course applies to using left, right AND width",
+			description: "The same of course applies to using left, right AND width.",
 			definition: {left: 5, right: 50, width: 100}
 		},{
 			description: "A normal view has NO clipping functionality for unruly children! If you want to hide overflow, you must use a ScrollView.",
 			definition: [{left: 50, top: -10, width: 100, height: 100},{right:-10,width:100,height:100}]
 		},{
-			description: "Children will stack with the latest additions on top of former",
+			description: "Children will stack with the latest additions on top of former.",
 			definition: [{added:"first",width: 100, height: 100,top:50,left:50},{added:"second",width: 100, height: 100,top:130,left:100}]
 		},{
 			description: "If you want to control the stacking yourself, use the zIndex property. Highest goes on top.",
@@ -61,7 +60,6 @@ var demos = {
 	},
 	verticalayout: {
 		title: "Vertical layout",
-		description: "Positioning a child view using vertical layout",
 		Parent: function(){
 			return Ti.UI.createView({backgroundColor:"red",layout:"vertical"});
 		},
@@ -93,7 +91,7 @@ var demos = {
 			description: "Commonly you will want to set a small top offset to subsequent children, just to get some spacing, and then let the vertical layouting handle the rest.",
 			definition: [{height:80},{height:50,top:5},{height:40,top:5}]
 		},{
-			description: "Of course, the same thing can be achieved using the bottom property instead",
+			description: "Of course, the same thing can be achieved using the bottom property instead.",
 			definition: [{height:80,bottom:5},{height:50,bottom:5},{height:40}]
 		},{
 			description: "You must always set a height on a child view in a vertical layout. If you don't, it will not automagically fill out the parent as in absolute layouts, but simply be invisible. This parent contains a child with a width of 200, but no height set.",
@@ -102,17 +100,19 @@ var demos = {
 	},
 	horizontallayout: {
 		title: "Horizontal layout",
-		description: "Laying out children horizontally",
 		Parent: function(){ return Ti.UI.createView({backgroundColor:"red",layout:"horizontal"}); },
 		demos: [{
 			description: "As you might have guessed, in a horizontal layout, the left and right properties instead are used as margins. Thus the space between two siblings in a horizontal layout is the sum of the right prop of the first and the left prop of the second.",
 			definition: [{top:10,height:80,width:100,right:10},{top:20,left:20,height:120,width:60}]
 		},{
-			description: "Horizontal layout has a useful clipping mechanism, where a child who wouldn't fit to the right of the previous child instead gets placed below the tallest child, thus beginning a new 'row'",
+			description: "Horizontal layout has a useful clipping mechanism, where a child who wouldn't fit to the right of the previous child instead gets placed below the tallest child, thus beginning a new 'row'.",
 			definition: [{top:10,height:80,width:100},{top:5,left:20,height:120,width:60},{height:80,width:160}]			
 		},{
 			description: "No matter which child on the previous row is the tallest, the first on the next row will be offset vertically in relation to that child.",
 			definition: [{top:10,height:120,width:100},{top:5,left:20,height:80,width:60},{height:80,width:160}]
+		},{
+			description: "The bottom property is included when calculating the tallest sibling on the previous row. Thus, here, it is the second child in the first row that determines the position of the next row.",
+			definition: [{top:10,height:120,width:100},{top:10,left:20,height:100,width:100,bottom:40},{height:80,width:160}]
 		},{
 			description: "The left property of the first child (or any child that is first in a row) offsets in relation to the parent. The right property of the last child is ignored...",
 			definition: [{top:10,height:80,width:70,left:5,right:5},{height:80,width:70},{left:5,height:120,width:60,right:20}]
@@ -128,7 +128,7 @@ var demos = {
 		title: "ScrollView container",
 		Parent: function(o){
 			var scroll = Ti.UI.createScrollView(mixin({backgroundColor:"red"},o)),
-				label = Ti.UI.createLabel({text:"",top:0,height:40,width:"auto",color:"#FFF",font:{fontSize:12}});
+				label = Ti.UI.createLabel({text:"",top:0,height:40,width:"auto",color:"#FFF",font:{fontSize:12,fontWeight:"bold"}});
 			for(var p in o){
 				label.text += p+": "+o[p]+"\n";
 			}
@@ -143,15 +143,19 @@ var demos = {
 			parent: {contentHeight:"auto"},
 			definition: {top:50,left:20,height:300,width:90}
 		},{
+			description: "Scroll indicators also have to be explicitly enabled.",
+			parent: {contentHeight:"auto",showVerticalScrollIndicator:true},
+			definition: {top:50,left:20,height:300,width:90}
+		},{
 			description: "Enabling scrolling if no children are outside the parents boundaries will have no effect.",
 			parent: {contentHeight:"auto"},
 			definition: {top:30,left:30,height:90,width:90}
 		},{
-			description: "Horizontal scrollwidth is enabled through contentWidth. Note how the red scrollview now 'steals' the horizontal scroll event, and how you have to scroll outside of it to navigate the outer ScrollableView containing the different demos.",
+			description: "Horizontal scrolling is enabled through contentWidth. Note how the red scrollview now 'steals' the horizontal scroll event, and how you have to scroll outside of it to navigate the outer ScrollableView containing the different demos.",
 			parent: {contentWidth:"auto"},
 			definition: {top:50,left:20,height:90,width:300}
 		},{
-			description: "Scrolling can be allowed in both directions at the same time. Note how the scrollview adapts its dimensions to exactly fit the content, making the child end up in the bottom-right corner",
+			description: "Scrolling can be allowed in both directions at the same time. Note how the scrollview adapts its dimensions to exactly fit the content, making the child end up in the bottom-right corner.",
 			parent: {contentHeight:"auto",contentWidth:"auto"},
 			definition: {top:100,left:100,height:200,width:200}
 		},{
