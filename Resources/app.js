@@ -148,7 +148,7 @@ var demos = {
 			parent: {contentHeight:"auto",contentWidth:"auto"},
 			definition: {top:100,left:100,height:200,width:200}
 		},{
-			description: "A child's bottom and right properties are used as margins in a ScrollView. See how the child now has a gutter between itself and the bottom-right corner!",
+			description: "A child's bottom and right properties are used as margins in a ScrollView. Scroll to the bottom-right to see how the child now has a gutter between itself and the corner!",
 			parent: {contentHeight:"auto",contentWidth:"auto"},
 			definition: {top:100,left:100,height:200,width:200,bottom:10,right:30}
 		},{
