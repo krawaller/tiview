@@ -140,7 +140,11 @@ var demos = {
 			parent: {contentHeight:"auto"},
 			definition: {top:50,left:20,height:300,width:90}
 		},{
-			description: "The same of course applies to contentWidth. Note how the red scrollview now 'steals' the horizontal scroll event, and how you have to scroll outside of it to navigate the outer ScrollableView containing the different demos.",
+			description: "Enabling scrolling if no children are outside the parents boundaries will have no effect.",
+			parent: {contentHeight:"auto"},
+			definition: {top:30,left:30,height:90,width:90}
+		},{
+			description: "Horizontal scrollwidth is enabled through contentWidth. Note how the red scrollview now 'steals' the horizontal scroll event, and how you have to scroll outside of it to navigate the outer ScrollableView containing the different demos.",
 			parent: {contentWidth:"auto"},
 			definition: {top:50,left:20,height:90,width:300}
 		},{
