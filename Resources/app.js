@@ -268,8 +268,8 @@ function GrandParent(){ return Ti.UI.createView({bottom:80,top:20,left:20,right:
 function Parent(o){ return Ti.UI.createView(mixin({backgroundColor:"red"},o)); }
 
 function Child(def,i){
-	var child = Ti.UI.createView(mixin({backgroundColor:["#FCFF3D","#FFF239","#FFE135","#FFD032","#FFB92C","#FFA829","#FF9424"][i]},def)),
-		label = Ti.UI.createLabel({top:5,left:5,text:"", font: {fontSize:12}});
+	var child = Ti.UI.createView(mixin({backgroundColor:["#FCFF3D","#FFD032","#FF9424"][i%3]},def)),
+		label = Ti.UI.createLabel({top:5,left:5,text:"", font: {fontSize:12}, color: "#000"});
 	child.add(label);
 	for(var p in def){
 		label.text += p+": "+def[p]+"\n";
@@ -328,10 +328,10 @@ function AboutWin(){
 }
 
 function MainTabGroup(){
-	var tabs = Ti.UI.createTabGroup(); // Ti.UI.createTabGroup({tabs:[Ti.UI.createTab({title:"demos",window:CategorySelectionWin(demos)}),Ti.UI.createTab({title:"about",window:AboutWin()})]});   <--- won't work on Android!
-	tabs.addTab(Ti.UI.createTab({title:"demos",window:CategorySelectionWin(demos)}));
-	tabs.addTab(Ti.UI.createTab({title:"about",window:AboutWin()}));
-	return tabs;
+	var tabGroup = Ti.UI.createTabGroup(); // Ti.UI.createTabGroup({tabs:[Ti.UI.createTab({title:"demos",window:CategorySelectionWin(demos)}),Ti.UI.createTab({title:"about",window:AboutWin()})]});   <--- won't work on Android!
+	tabGroup.addTab(Ti.UI.createTab({title:"demos",window:CategorySelectionWin(demos)}));
+	tabGroup.addTab(Ti.UI.createTab({title:"about",window:AboutWin()}));
+	return tabGroup;
 }
 
 var maintabgroup = MainTabGroup();
