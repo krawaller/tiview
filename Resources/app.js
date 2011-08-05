@@ -269,7 +269,7 @@ function Parent(o){ return Ti.UI.createView(mixin({backgroundColor:"red"},o)); }
 
 function Child(def){
 	var child = Ti.UI.createView(mixin({backgroundColor:"yellow",borderColor:"#000",borderSize:1},def)),
-		label = Ti.UI.createLabel({top:5,left:5,text:"", font: {fontSize:12}});
+		label = Ti.UI.createLabel({top:5,left:5,text:"", font: {fontSize:12}, color: '#000'});
 	child.add(label);
 	for(var p in def){
 		label.text += p+": "+def[p]+"\n";
@@ -328,9 +328,11 @@ function AboutWin(){
 }
 
 function MainTabGroup(){
-	return Ti.UI.createTabGroup({
-		tabs: [Ti.UI.createTab({title:"demos",window:CategorySelectionWin(demos)}),Ti.UI.createTab({title:"about",window:AboutWin()})]
-	});
+	var tabGroup = Ti.UI.createTabGroup({});
+	[Ti.UI.createTab({title:"demos",window:CategorySelectionWin(demos)}),Ti.UI.createTab({title:"about",window:AboutWin()})].forEach(function(tab){
+		tabGroup.addTab(tab);
+	})
+	return tabGroup;
 }
 
 var maintabgroup = MainTabGroup();
