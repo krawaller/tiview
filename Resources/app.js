@@ -223,7 +223,7 @@ var demos = {
 			description: "Here the table has a set height, triggering the parent to do the scrolling. Using the table's scrollToIndex function now would result in very weird behaviour. To wit: don't put tables in ScrollViews, there's absolutely no point!",
 			parent: {contentHeight:"auto"},
 			children: {top:80,height:400,data:[{title:"foo1"},{title:"foo2"},{title:"foo3"},{title:"foo4"},{title:"foo5"}]},
-			Child: function(){ return Ti.UI.createTableView(); }
+			Child: function(o){ return Ti.UI.createTableView(o); }
 		}]
 	}
 	
