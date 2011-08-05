@@ -109,7 +109,7 @@ var demos = {
 			description: "...except that it might make the view end up on its own row!",
 			children: [{top:10,height:80,width:70,left:5,right:5},{height:80,width:70},{left:5,height:120,width:60,right:2000}]
 		},{
-			description: "Must as a child in a vertical layout must have a height, all children in a horizontal layout must have a set width. This parent contains a child with height 200 but no width, which therefore is invisible.",
+			description: "Much as a child in a vertical layout must have a height, all children in a horizontal layout must have a set width. This parent contains a child with height 200 but no width, which therefore is invisible.",
 			children: {height:200}
 		},{
 			description: "The row clipping is updated whenever the dimensions of the parent changes. When the parent dimension animates, it seems that the children are immediately animated towards where they would end up after the parent animation.",
@@ -224,6 +224,10 @@ var demos = {
 			parent: {contentHeight:"auto"},
 			children: {top:80,height:400,data:[{title:"foo1"},{title:"foo2"},{title:"foo3"},{title:"foo4"},{title:"foo5"}]},
 			Child: function(o){ return Ti.UI.createTableView(o); }
+		},{
+			description: "If a scrollview is given horizontal layout and horizontal scrolling, there will be no row clipping.",
+			parent: {contentWidth:"auto",layout:"horizontal"},
+			children: [{top:10,height:80,width:70,left:5,right:5},{height:80,width:70},{left:5,height:120,width:60,right:20}]
 		}]
 	}
 	
