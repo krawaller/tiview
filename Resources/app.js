@@ -25,7 +25,8 @@ var demos = {
 			description: "The same of course applies to using left, right AND width.",
 			children: {left: 5, right: 50, width: 100}
 		},{
-			description: "A normal view has NO clipping functionality for unruly children! If you want to hide overflow, you must use a ScrollView.",
+			iphone: "A normal view has NO clipping functionality for unruly children on iPhone! If you want to hide overflow, you must use a ScrollView.",
+			android: "On Android, a view will crop out overflowing children. On iPhone, however, no cropping is done, and the overflowing bits are visible!",
 			children: [{left: 50, top: -10, width: 100, height: 100},{right:-10,width:100,height:100}]
 		},{
 			description: "Children will stack with the latest additions on top of former.",
@@ -34,13 +35,15 @@ var demos = {
 			description: "If you want to control the stacking yourself, use the zIndex property. Highest goes on top.",
 			children: [{added:"first",zIndex: 1, width: 100, height: 100,top:50,left:50},{added:"second",width: 100, height: 100,top:130,left:100}]
 		},{
-			description: "All controls (well, almost) inherit from view, and can thus have children! Here we're using a Switch as a parent.",
+			iphone: "All controls (well, almost) inherit from view, and can thus have children! Here we're using a Switch as a parent. This doesn't work on Android",
+			android: "This switch has a child, but on Android this isn't rendered. On iPhone, (almost) any control can have child views.",
 			children: {height: 80, width: 80, top: 15},
 			Parent: function(){
 				return Ti.UI.createSwitch({ value: false });
 			}
 		},{
-			description: "Even views with 'special' children of their own, such as tableviews, can have normal child views. Thus they must have special syntax to add the special children (addTab,addRow..).",
+			iphone: "Even views with 'special' children of their own, such as tableviews, can have normal child views. Thus they must have special syntax to add the special children (addTab,addRow..).",
+			android: "Views with 'special' children of their own can also have 'normal' view children, but the behaviour is buggy on Android.",
 			children: {height: 80, width: 80, top: 15},
 			Parent: function(){
 				return Ti.UI.createTableView({data:[{title:"row1"},{title:"row2"},{title:"row3"}]});
@@ -286,7 +289,7 @@ function DemoView(o){
 	});
 	gp.add(parent);
 	view.add(gp);
-	view.add(Ti.UI.createLabel({ bottom: 0, left:5, right: 5, height: 80, text: o.description, font: {fontSize:12} }));
+	view.add(Ti.UI.createLabel({ bottom: 0, left:5, right: 5, height: 80, text: o[PLATFORM]||o.description, font: {fontSize:12} }));
 	return view;
 }
 
@@ -334,6 +337,7 @@ function MainTabGroup(){
 	return tabGroup;
 }
 
-var maintabgroup = MainTabGroup();
+var maintabgroup = MainTabGroup(),
+	PLATFORM = Ti.Platform.osname;
 maintabgroup.open();
 
