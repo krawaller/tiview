@@ -18,6 +18,9 @@ Each demo object has these properties:
  - Parent: constructor function to use as demo parent, instead of category-specific or default Parent constructor.
  - Child: constructor function to use for demo children, instead of category-specific or default Child constructor.
 
+To ensure that the demos have the same dimension on all platforms, the parent in a demo is contained in a grandparent with
+dimensions 280*240
+
 */
 var demos = {
 	basicposition: {
@@ -36,7 +39,7 @@ var demos = {
 			children: {top: 30, height: 80}
 		},{
 			description: "...setting top and bottom (if you know the parent's height and do the math right).",
-			children: {top: 30, bottom: 125}
+			children: {top: 30, bottom: 130}
 		},{
 			description: "If you set top, bottom AND height (don't!), then weird things happen. On iPhone the height is honored, but the offset gets screwed up. On Android its the other way around.",
 			children: {top: 5, height: 80, bottom: 60}
@@ -285,7 +288,7 @@ var demos = {
 
 function mixin(prio,def){ var o = {}; for(var p in def){ o[p] = def[p]; } for(p in prio){ o[p] = prio[p]; } return o; }
 
-function GrandParent(){ return Ti.UI.createView({bottom:80,top:20,left:20,right:20,borderSize:3,borderColor:"#CCC"}); }
+function GrandParent(){ return Ti.UI.createView({top:20,left:20,width:280,height:240,borderSize:3,borderColor:"#CCC"}); }
 
 function Parent(o){ return Ti.UI.createView(mixin({backgroundColor:"red"},o)); }
 
