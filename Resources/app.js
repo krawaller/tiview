@@ -57,15 +57,14 @@ var demos = {
 			description: "If you want to control the stacking yourself, use the zIndex property. Highest goes on top.",
 			children: [{added:"first",zIndex: 1, width: 100, height: 100,top:50,left:50},{added:"second",width: 100, height: 100,top:130,left:100}]
 		},{
-			iphone: "All controls (well, almost) inherit from view, and can thus have children! Here we're using a Switch as a parent. This doesn't work on Android",
+			iphone: "All controls (well, almost) inherit from view, and can thus have children! Here we're using a Switch as a parent. This doesn't work on Android.",
 			android: "This switch has a child, but on Android this isn't rendered. On iPhone, (almost) any control can have child views.",
-			children: {height: 80, width: 80, top: 15},
+			children: {height: 80, width: 80, top: 15, left: 30},
 			Parent: function(){
 				return Ti.UI.createSwitch({ value: false });
 			}
 		},{
-			iphone: "Even views with 'special' children of their own, such as tableviews, can have normal child views. Thus they must have special syntax to add the special children (addTab,addRow..).",
-			android: "Views with 'special' children of their own can also have 'normal' view children, but the behaviour is buggy on Android.",
+			description: "Even views with 'special' children of their own, such as tableviews, can have normal child views (although their behaviour is buggy on Android). Thus they must have special syntax to add the special children (addTab,addRow..).",
 			children: {height: 80, width: 80, top: 15},
 			Parent: function(){
 				return Ti.UI.createTableView({data:[{title:"row1"},{title:"row2"},{title:"row3"}]});
@@ -338,7 +337,7 @@ function CategoryWin(cat){
 	var views = [];
 	cat.demos.forEach(function(demo){
 		var d = DemoView({
-			description:demo[PLATFORM] || demo.description,
+			description:demo[PLATFORM] || demo.description || "[No "+PLATFORM+" or default description provided for this demo!]",
 			parent: (demo.Parent || cat.Parent || Parent)(demo.parent || (cat.parent) || ({})),
 			children: (Array.isArray(demo.children) ? demo.children : demo.children?[demo.children]:[]).map(function(cdef,i){return (demo.Child || cat.Child || (Child))(cdef,i);})
 		});
