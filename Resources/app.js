@@ -360,5 +360,4 @@ function MainTabGroup(){
 var maintabgroup = MainTabGroup(),
 	PLATFORM = Ti.Platform.osname;
 maintabgroup.open();
-Ti.API.log(PLATFORM);
 
