@@ -1,5 +1,24 @@
 // Layout demos by Krawaller, http://blog.krawaller.se
 
+/*
+This object literal contains the definitions of the various categories and demos!
+
+Each category object has these properties:
+ - title: set as title for the containing window
+ - demos: array of demo definitions (see below)
+ - Parent: constructor function to use as demo parent, instead of default Parent constructor. Overridden by demo-specific constructor.
+ - Child: constructor function to use for demo children, instead of default Child constructor. Overridden by demo-specific constructor.
+
+Each demo object has these properties:
+ - description: text used to explain the demo. Will be used if no platform-specific text is supplied.
+ - iphone: text to be used on iphone only.
+ - android: text to be used on android only.
+ - children: object or array of objects sent to Child constructor, the result of which is added to the parent
+ - parent: object sent to the Parent constructor. optional.
+ - Parent: constructor function to use as demo parent, instead of category-specific or default Parent constructor.
+ - Child: constructor function to use for demo children, instead of category-specific or default Child constructor.
+
+*/
 var demos = {
 	basicposition: {
 		title: "Absolute positioning",
@@ -329,7 +348,7 @@ function AboutWin(){
 }
 
 function MainTabGroup(){
-	var tabGroup = Ti.UI.createTabGroup(); // Ti.UI.createTabGroup({tabs:[Ti.UI.createTab({title:"demos",window:CategorySelectionWin(demos)}),Ti.UI.createTab({title:"about",window:AboutWin()})]});   <--- won't work on Android!
+	var tabGroup = Ti.UI.createTabGroup(); // Ti.UI.createTabGroup({tabs:[Ti.UI.createTab({title:"demos",window:CategorySelectionWin(demos)}),Ti.UI.createTab({title:"about",window:AboutWin()})]});   <--- won't work on Android, have to add tabs separately! Sigh...!
 	tabGroup.addTab(Ti.UI.createTab({title:"demos",window:CategorySelectionWin(demos)}));
 	tabGroup.addTab(Ti.UI.createTab({title:"about",window:AboutWin()}));
 	return tabGroup;
