@@ -182,6 +182,7 @@ var demos = {
 	scrollview: {
 		title: "ScrollView container",
 		Parent: function(o){
+			o = o || ({});
 			var scroll = Ti.UI.createScrollView(mixin({backgroundColor:"red"},o)),
 				label = Ti.UI.createLabel({text:"",top:0,height:40,width:"auto",color:"#FFF",font:{fontSize:12,fontWeight:"bold"}});
 			for(var p in o){
@@ -230,7 +231,31 @@ var demos = {
 		},{
 			description: "If a scrollview is given horizontal layout and horizontal scrolling, there will be no row clipping.",
 			parent: {contentWidth:"auto",layout:"horizontal"},
-			children: [{top:10,height:80,width:70,left:5,right:5},{height:80,width:70},{left:5,height:120,width:60,right:20}]
+			children: [{top:10,height:80,width:100,left:5,right:5},{height:80,width:120},{left:5,height:120,width:100,right:20}]
+		},{
+			description: "Combining horizontal layout with vertical scrolling works like a charm! You get row clipping, and can still scroll down to see children displaced to rows that are out of sight.",
+			parent: {contentHeight:"auto",layout:"horizontal"},
+			children: [{height:120,width:100,top:10,left:10},{height:120,width:100,top:10,left:10},{height:120,width:100,top:10,left:10},{height:120,width:100,top:10,left:10},{height:120,width:100,top:10,left:10},{height:120,width:100,top:10,left:10},{height:120,width:100,top:10,left:10}]
+		},{
+			description: "You can still use bottom and right to offset a child from the parents edges, even when scrolling is enabled.",
+			children: {bottom:30,right:30,height:80,width:80},
+			parent: {contentHeight:"auto",contentWidth:"auto"}
+		},{
+			description: "A negative offset of either of those properties will however not trigger scrolling, even though the child is now outside the parent!",
+			children: {bottom:-10,right:-10,height:80,width:80},
+			parent: {contentHeight:"auto",contentWidth:"auto"}
+		},{
+			description: "Having no width or height will fill out the parent as normal, even when scrolling is enabled.",
+			children: {"I have no height or width":""},
+			parent: {contentHeight:"auto",contentWidth:"auto"}
+		},{
+			description: "If a scrolling parent is extended due to another child with a long width/height, the autosized child will fill the extended space too.",
+			children: [{"I have no height or width":""},{top:30,left:30,height:70,width:500}],
+			parent: {contentHeight:"auto",contentWidth:"auto"}
+		},{
+			description: "Interestingly, if height and width are explicitly set to 'auto', we get very weird behaviour! Note the small yellow square in the center of the parent.",
+			children: [{height:"auto",width:"auto"},{top:30,left:30,height:70,width:500}],
+			parent: {contentHeight:"auto",contentWidth:"auto"}
 		}]
 	}
 	
