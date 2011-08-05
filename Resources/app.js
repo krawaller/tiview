@@ -132,7 +132,7 @@ var demos = {
 				return p;
 			}
 		},{
-			description: "If a child is invisible, it will still take up room in the layout.",
+			description: "If a child is invisible (by setting the visible prop to false or opacity to 0), it will still take up room in the layout.",
 			children: [{added:"first",top:10,left:10,height:80,width:80},{height:80,width:80,left:10,visible:false},{added:"third",top:10,left:10,height:80,width:80}]			
 		},{
 			description: "If it is visible upon adding to the parent, but made invisible later, the layout will still not change.",
