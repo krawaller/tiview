@@ -19,7 +19,7 @@ var demos = {
 			description: "...setting top and bottom (if you know the parent's height and do the math right).",
 			children: {top: 30, bottom: 125}
 		},{
-			description: "If you set top, bottom AND height (don't!), then weird things happen. The height is honored, but the offset gets screwed up.",
+			description: "If you set top, bottom AND height (don't!), then weird things happen. On iPhone the height is honored, but the offset gets screwed up. On Android its the other way around.",
 			children: {top: 5, height: 80, bottom: 60}
 		},{
 			description: "The same of course applies to using left, right AND width.",
@@ -284,12 +284,10 @@ function DemoView(o){
 	var view = Ti.UI.createView(),
 		gp = GrandParent(),
 		parent = o.parent;
-	o.children.forEach(function(child){
-		parent.add(child);
-	});
+	o.children.forEach(function(child){ parent.add(child); });
 	gp.add(parent);
 	view.add(gp);
-	view.add(Ti.UI.createLabel({ bottom: 0, left:5, right: 5, height: 80, text: o[PLATFORM]||o.description, font: {fontSize:12} }));
+	view.add(Ti.UI.createLabel({ bottom: 0, left:5, right: 5, height: 80, text: o.description, font: {fontSize:12} }));
 	return view;
 }
 
@@ -297,7 +295,7 @@ function CategoryWin(cat){
 	var views = [];
 	cat.demos.forEach(function(demo){
 		var d = DemoView({
-			description:demo.description,
+			description:demo[PLATFORM] || demo.description,
 			parent: (demo.Parent || cat.Parent || Parent)(demo.parent || (cat.parent) || ({})),
 			children: (Array.isArray(demo.children) ? demo.children : demo.children?[demo.children]:[]).map(function(cdef,i){return (demo.Child || cat.Child || (Child))(cdef,i);})
 		});
@@ -340,4 +338,5 @@ function MainTabGroup(){
 var maintabgroup = MainTabGroup(),
 	PLATFORM = Ti.Platform.osname;
 maintabgroup.open();
+Ti.API.log(PLATFORM);
 
