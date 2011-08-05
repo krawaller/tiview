@@ -112,6 +112,9 @@ var demos = {
 			description: "Much as a child in a vertical layout must have a height, all children in a horizontal layout must have a set width. This parent contains a child with height 200 but no width, which therefore is invisible.",
 			children: {height:200}
 		},{
+			description: "The margins of widthless children will however still affect the layout! Here there is a first child with no width but left set to 10, which displaces the second child.",
+			children: [{height:80,left:10},{added:"second",width:100,height:80}]
+		},{
 			description: "The row clipping is updated whenever the dimensions of the parent changes. When the parent dimension animates, it seems that the children are immediately animated towards where they would end up after the parent animation.",
 			children: [{top:10,height:80,width:70,left:5,right:5},{height:80,width:70},{left:5,height:120,width:60,right:20}],
 			Parent: function(){
