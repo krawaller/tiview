@@ -47,9 +47,9 @@ var demos = {
 			description: "The same of course applies to using left, right AND width.",
 			children: {left: 5, right: 50, width: 100}
 		},{
-			iphone: "A normal view has NO clipping functionality for unruly children on iPhone! If you want to hide overflow, you must use a ScrollView.",
-			android: "On Android, a view will crop out overflowing children. On iPhone, however, no cropping is done, and the overflowing bits are visible!",
-			children: [{left: 50, top: -10, width: 100, height: 100},{right:-10,width:100,height:100}]
+			iphone: "On iPhone, a normal view has NO clipping functionality for unruly children - unless you explicitly set the parent's borderRadius to 0, or use a scrollView instead.",
+			android: "On Android, a view will crop out overflowing children. On iPhone, however, you need to set the parent's borderRadius to 0 for cropping to happen.",
+			children: [{left: 50, top: -10, width: 100, height: 100},{right:-10,width:100,height:100}],
 		},{
 			description: "Children will stack with the latest additions on top of former.",
 			children: [{added:"first",width: 100, height: 100,top:50,left:50},{added:"second",width: 100, height: 100,top:130,left:100}]
